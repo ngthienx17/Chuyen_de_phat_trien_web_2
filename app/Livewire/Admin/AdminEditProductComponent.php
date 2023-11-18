@@ -52,6 +52,21 @@ class AdminEditProductComponent extends Component
 
     public function updateProduct()
     {
+        // Validate the form data
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products',
+            'short_description' => 'required|string',
+            'description' => 'required|string',
+            'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'nullable|numeric|min:0',
+            'SKU' => 'required|string|max:255|unique:products',
+            'stock_status' => 'required|in:in_stock,out_of_stock',
+            'featured' => 'boolean',
+            'quantity' => 'required|integer|min:0',
+            'newImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required|exists:categories,id', // Make sure the category exists
+        ]);
         $product = Product::find($this->product_id);
         $product->name = $this->name;
         $product->slug = $this->slug;
@@ -72,6 +87,7 @@ class AdminEditProductComponent extends Component
         $product->category_id = $this->category_id;
         $product->save();
         session()->flash('message', 'Sửa sản phẩm thành công!');
+        return redirect()->to('/admin/products');
     }
 
     public function render()

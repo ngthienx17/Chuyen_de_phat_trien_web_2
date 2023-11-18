@@ -10,8 +10,14 @@ class AdminHomeSliderComponent extends Component
     public function deleteSlider($slider_id)
     {
         $slider = HomeSlider::find($slider_id);
-        $slider->delete();
-        session()->flash('message', 'Xóa Slider thành công!');
+        if ($slider) {
+            # code...
+            $slider->delete();
+            session()->flash('message', 'Xóa Slider thành công!');
+        }else{
+            session()->flash('error-message', 'Không tìm thấy slider này!');
+
+        }
     }
     public function render()
     {

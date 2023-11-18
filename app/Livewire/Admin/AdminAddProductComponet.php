@@ -24,7 +24,7 @@ class AdminAddProductComponet extends Component
     public $quantity;
     public $image;
     public $category_id;
-   
+
 
     public function mount()
     {
@@ -37,6 +37,22 @@ class AdminAddProductComponet extends Component
     }
     public function addProduct()
     {
+        // Validate the form data
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products',
+            'short_description' => 'required|string',
+            'description' => 'required|string',
+            'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'nullable|numeric|min:0',
+            'SKU' => 'required|string|max:255|unique:products',
+            'stock_status' => 'required|in:in_stock,out_of_stock',
+            'featured' => 'boolean',
+            'quantity' => 'required|integer|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required|exists:categories,id', // Make sure the category exists
+        ]);
+
         $product = new Product();
         $product->name = $this->name;
         $product->slug = $this->slug;
@@ -54,6 +70,8 @@ class AdminAddProductComponet extends Component
         $product->category_id = $this->category_id;
         $product->save();
         session()->flash('message', 'Thêm sản phẩm thành công!');
+        return redirect()->to('/admin/products');
+
     }
     public function render()
     {

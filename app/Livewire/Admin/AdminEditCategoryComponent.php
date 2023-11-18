@@ -26,11 +26,19 @@ class AdminEditCategoryComponent extends Component
     }
     public function updateCategory()
     {
+        // Thực hiện validation
+        $this->validate([
+            'name' => 'required|string|max:255|unique:categories', // Đảm bảo 'name' là một chuỗi không trùng lặp trong bảng 'categories'
+            'slug' => 'required|string|max:255|unique:categories',
+        ]);
         $category = Category::find($this->category_id);
         $category->name = $this->name;
         $category->slug = $this->slug;
         $category->save();
         session()->flash('message', 'Cập nhật danh mục thành công!');
+        return redirect()->to('/admin/categories');
+
+        
     }
     public function render()
     {

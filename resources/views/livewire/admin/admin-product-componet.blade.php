@@ -30,6 +30,8 @@
                     <div class="panel-body">
                         @if (Session::has('message'))
                             <div class="alert alert-success" role="aler">{{ Session::get('message') }}</div>
+                        @else
+                            <div class="alert alert-danger" role="alert">{{ Session::get('error') }}</div>
                         @endif
                         <table class="table table-striped">
                             <thead>
@@ -62,6 +64,7 @@
                                                 href="{{ route('admin.editproduct', ['product_slug' => $product->slug]) }}"><i
                                                     class="fa fa-edit fa-2x"></i></a>
                                             <a href="#" wire:click.prevent="deleteProduct({{ $product->id }})"
+                                                wire:confirm="Bạn có chắc chắn?\n\nXóa dữ liệu: {{ $product->name }}"
                                                 style="margin-left:10px;"><i
                                                     class="fa fa-times fa-2x text-danger"></i></a>
                                         </td>

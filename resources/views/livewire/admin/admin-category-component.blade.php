@@ -23,7 +23,8 @@
                                 All Categories
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('admin.addcategory') }}" class="btn btn-success pull-right">Add New</a>
+                                <a href="{{ route('admin.addcategory') }}" class="btn btn-success pull-right">Add
+                                    New</a>
                             </div>
                         </div>
                     </div>
@@ -51,6 +52,7 @@
                                                 href="{{ route('admin.editcategory', ['category_slug' => $category->slug]) }}"><i
                                                     class="fa fa-edit fa-2x"></i></a>
                                             <a href="#" wire:click.prevent="deleteCategory({{ $category->id }})"
+                                                wire:confirm="Bạn có chắc chắn?\n\nXóa dữ liệu: {{$category->name}}"
                                                 style="margin-left:10px;"><i
                                                     class="fa fa-times fa-2x text-danger"></i></a>
                                         </td>

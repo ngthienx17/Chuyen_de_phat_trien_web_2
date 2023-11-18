@@ -32,6 +32,14 @@ class AdminEditHomeSliderComponent extends Component
     }
     public function updateSlider()
     {
+        $this->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'link' => 'nullable|url',
+            'newImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required|in:active,inactive',
+        ]);
         $slider = HomeSlider::find($this->slider_id);
         $slider->title = $this->title;
         $slider->subtitle = $this->subtitle;
@@ -45,6 +53,7 @@ class AdminEditHomeSliderComponent extends Component
         $slider->status = $this->status;
         $slider->save();
         session()->flash('message', 'Sửa Slider thành công!');
+        return redirect()->to('/admin/slider');
     }
     public function render()
     {

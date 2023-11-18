@@ -12,8 +12,14 @@ class AdminProductComponet extends Component
     public function deleteProduct($id)
     {
         $product = Product::find($id);
-        $product->delete();
-        session()->flash('message', 'Xóa sản phẩm thành công!');
+        if ($product) {
+            # code...
+            $product->delete();
+            session()->flash('message', 'Xóa sản phẩm thành công!');
+        }else{
+            session()->flash('error', 'Sản phẩm không tồn tại!');
+
+        }
     }
     public function render()
     {

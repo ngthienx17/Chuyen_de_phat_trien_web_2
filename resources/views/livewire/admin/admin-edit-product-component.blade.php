@@ -26,6 +26,9 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Product Name"
                                         wire:model="name" wire:keyup="generateslug">
+                                    @error('name')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -33,12 +36,18 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Product Slug"
                                         wire:model="slug">
+                                    @error('slug')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-md-4 control-label">Short Description</label>
                                 <div class="col-md-4">
                                     <textarea type="text" class="form-control input-md" placeholder="Short Description" wire:model="short_description"></textarea>
+                                    @error('short_description')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -52,6 +61,9 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Regular Price"
                                         wire:model="regular_price">
+                                    @error('regular_price')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -66,6 +78,9 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="SKU"
                                         wire:model="SKU">
+                                    @error('SKU')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -91,16 +106,23 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Quantity"
                                         wire:model="quantity">
+                                    @error('quantity')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label class="col-md-4 control-label">Hình Ảnh Sản Phẩm</label>
                                 <div class="col-md-4">
                                     <input type="file" class="form-control input-md" wire:model="newImage" />
+                                    @error('newImage')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                     @if ($newImage)
                                         <img src="{{ $newImage->temporaryUrl() }}" width="120" />
                                     @else
-                                        <img src="{{asset('assets/images/products')}}/{{$image}}" width="120" />
+                                        <img src="{{ asset('assets/images/products') }}/{{ $image }}"
+                                            width="120" />
                                     @endif
                                 </div>
                             </div>
@@ -115,6 +137,9 @@
                                         @endforeach
 
                                     </select>
+                                    @error('category_id')
+                                        <span class="error">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">

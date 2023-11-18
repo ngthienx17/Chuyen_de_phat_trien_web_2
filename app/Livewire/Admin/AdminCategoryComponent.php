@@ -10,10 +10,15 @@ use Livewire\WithPagination;
 class AdminCategoryComponent extends Component
 {
     use WithPagination;
-    public function deleteCategory($id){
+    public function deleteCategory($id)
+    {
         $categories = Category::find($id);
-        $categories->delete();
-        session()->flash('message', 'Xóa danh mục thành công!');
+        if ($categories) {
+            $categories->delete();
+            session()->flash('message', 'Xóa danh mục thành công!');
+        }else{
+            session()->flash('error', 'Xóa danh mục thất bại');
+        }
     }
     public function render()
     {

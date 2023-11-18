@@ -17,11 +17,17 @@ class AdminAddCategoryComponent extends Component
     }
     public function storeCategory()
     {
+        // Thực hiện validation
+        $this->validate([
+            'name' => 'required|string|max:255|unique:categories', // Đảm bảo 'name' là một chuỗi không trùng lặp trong bảng 'categories'
+            'slug' => 'required|string|max:255|unique:categories',
+        ]);
         $category = new Category();
         $category->name = $this->name;
         $category->slug = $this->slug;
         $category->save();
         session()->flash('message', 'Thêm nhóm hàng mới thành công!');
+        return redirect()->to('/admin/categories');
     }
     public function render()
     {

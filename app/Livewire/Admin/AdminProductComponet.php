@@ -17,7 +17,7 @@ class AdminProductComponet extends Component
             $product->delete();
             session()->flash('message', 'Xóa sản phẩm thành công!');
         }else{
-            session()->flash('error', 'Sản phẩm không tồn tại!');
+            session()->flash('error-message', 'Sản phẩm không tồn tại!');
 
         }
     }

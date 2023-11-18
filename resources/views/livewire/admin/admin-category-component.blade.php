@@ -31,6 +31,8 @@
                     <div class="panel-body">
                         @if (Session::has('message'))
                             <div class="alert alert-success" role="aler">{{ Session::get('message') }}</div>
+                            @elseif (Session::has('error-message'))
+                            <div class="alert alert-danger" role="aler">{{ Session::get('error-message') }}</div>
                         @endif
                         <table class="table table-striped">
                             <thead>

@@ -17,7 +17,7 @@ class AdminCategoryComponent extends Component
             $categories->delete();
             session()->flash('message', 'Xóa danh mục thành công!');
         }else{
-            session()->flash('error', 'Xóa danh mục thất bại');
+            session()->flash('error-message', 'Xóa danh mục thất bại');
         }
     }
     public function render()

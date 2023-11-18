@@ -55,16 +55,12 @@ class AdminEditProductComponent extends Component
         // Validate the form data
         $this->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:products',
+            'slug' => 'required|string|max:255',
             'short_description' => 'required|string',
             'description' => 'required|string',
             'regular_price' => 'required|numeric|min:0',
-            'sale_price' => 'nullable|numeric|min:0',
-            'SKU' => 'required|string|max:255|unique:products',
-            'stock_status' => 'required|in:in_stock,out_of_stock',
-            'featured' => 'boolean',
+            'SKU' => 'required|string|max:255',
             'quantity' => 'required|integer|min:0',
-            'newImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_id' => 'required|exists:categories,id', // Make sure the category exists
         ]);
         $product = Product::find($this->product_id);

@@ -37,8 +37,6 @@ class AdminEditHomeSliderComponent extends Component
             'subtitle' => 'required|string|max:255',
             'price' => 'required|numeric',
             'link' => 'nullable|url',
-            'newImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status' => 'required|in:active,inactive',
         ]);
         $slider = HomeSlider::find($this->slider_id);
         $slider->title = $this->title;

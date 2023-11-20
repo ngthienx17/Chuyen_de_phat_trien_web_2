@@ -12,6 +12,7 @@
         .flex.justify-between.flex-1 {
             display: none !important;
         }
+
     </style>
     <div class="container" style="padding:30px">
         <div class="row">
@@ -23,15 +24,19 @@
                                 <h3 class="title">All Products</h3>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('admin.addproduct') }}" class="btn btn-success pull-right">Add New</a>
+                                <a href="{{ route('admin.addproduct') }}"
+                                    class="btn btn-success pull-right">Add New</a>
                             </div>
                         </div>
                     </div>
+
                     <div class="panel-body">
-                        @if (Session::has('message'))
-                            <div class="alert alert-success" role="aler">{{ Session::get('message') }}</div>
-                        @elseif (Session::has('error-message'))
-                            <div class="alert alert-danger" role="alert">{{ Session::get('error-message') }}</div>
+                        @if(Session::has('message'))
+                            <div class="alert alert-success" role="aler">
+                                {{ Session::get('message') }}</div>
+                        @elseif(Session::has('error-message'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ Session::get('error-message') }}</div>
                         @endif
                         <table class="table table-striped">
                             <thead>
@@ -48,10 +53,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach($products as $product)
                                     <tr>
                                         <td>{{ $product->id }}</td>
-                                        <td> <img src="{{ asset('assets/images/products') }}/{{ $product->image }}"
+                                        <td> <img
+                                                src="{{ asset('assets/images/products') }}/{{ $product->image }}"
                                                 alt="" width="60"> </td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->stock_status }}</td>
@@ -60,22 +66,59 @@
                                         <td>{{ $product->category->name }}</td>
                                         <td>{{ $product->created_at }}</td>
                                         <td>
-                                            <a
+                                            <a class="btn btn-sm btn-success"
                                                 href="{{ route('admin.editproduct', ['product_slug' => $product->slug]) }}"><i
-                                                    class="fa fa-edit fa-2x"></i></a>
-                                            <a href="#" wire:click.prevent="deleteProduct({{ $product->id }})"
-                                                wire:confirm="Bạn có chắc chắn?\n\nXóa dữ liệu: {{ $product->name }}"
-                                                style="margin-left:10px;"><i
-                                                    class="fa fa-times fa-2x text-danger"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{ $products->links() }}
+                                                    class='bx bx-edit'></i> Edit</a>
+                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modalFormDelete"
+                                                wire:click="selectItem({{ $product->id }})">
+                                                <i class='bx bx-trash'></i>
+                                                Delete
+                                            </button>
+                                            <!-- Modal -->
+                                            <!-- {{-- Delete --}} -->
+                                            <div class="modal fade" id="modalFormDelete" tabindex="-1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalCenterTitle">Cảnh báo
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            Bạn có chắc chắn muốn xóa sản phẩm
+                                                            @if ($product = $products->firstWhere('id', $selectedItem))
+                                                {{ $product->name }}
+                                                        @else
+                                                            Product not found.
+                                @endif
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Đóng
+                        </button>
+                        <button type="button" class="btn btn-primary" wire:click.prevent="deleteProduct"
+                            data-bs-dismiss="modal">Xóa</button>
                     </div>
                 </div>
             </div>
         </div>
+        </td>
+        </tr>
+        @endforeach
+
+        </tbody>
+        </table>
+        {{ $products->links() }}
+
     </div>
+
+</div>
+</div>
+</div>
+</div>
 </div>

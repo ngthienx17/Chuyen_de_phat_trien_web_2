@@ -9,9 +9,15 @@ use Livewire\WithPagination;
 class AdminProductComponet extends Component
 {
     use WithPagination;
-    public function deleteProduct($id)
+     public $selectedItem;
+    public function selectItem($itemId)
     {
-        $product = Product::find($id);
+        $this->selectedItem = $itemId;
+    }
+   
+    public function deleteProduct()
+    {
+        $product = Product::find($this->selectedItem);
         if ($product) {
             # code...
             $product->delete();

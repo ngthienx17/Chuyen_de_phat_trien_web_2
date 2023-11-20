@@ -269,20 +269,7 @@
    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   @livewireScripts
   @stack('scripts')
-  <script>
-    windown.addEventListener('closeModal', event => {
-      $('#modalFormEdit').modal('hide');
-    });
-    windown.addEventListener('openModal', event => {
-      $('#modalFormEdit').modal('show');
-    });
-    windown.addEventListener('openDeleteModal', event => {
-      $('#modalFormDelete').modal('show');
-    });
-    windown.addEventListener('closeDeleteModal', event => {
-      $('#modalFormDelete').modal('hide');
-    });
-  </script>
+  
 
   </body>
 </html>

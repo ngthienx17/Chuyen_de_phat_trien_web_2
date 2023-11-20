@@ -50,22 +50,15 @@
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#modalFormEdit"
-                                                wire:click="mount({{ $category->slug }})">
-                                                Edit
-                                            </button>
-                                            <a
+                                            <a class="btn btn-sm btn-success"
                                                 href="{{ route('admin.editcategory', ['category_slug' => $category->slug]) }}"><i
-                                                    class="fa fa-edit fa-2x"></i></a>
+                                                    class='bx bx-edit'></i> Edit</a>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#modalFormDelete"
                                                 wire:click="selectItem({{ $category->id }})">
+                                                <i class='bx bx-trash'></i>
                                                 Delete
                                             </button>
-
-
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -94,21 +87,6 @@
                                     </button>
                                     <button type="button" class="btn btn-primary" wire:click.prevent="deleteCategory"
                                         data-bs-dismiss="modal">Xóa</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Edit --}}
-                    <div class="modal fade" id="modalFormEdit" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalCenterTitle">Edit</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    @livewire('admin.admin-edit-category-component')
                                 </div>
                             </div>
                         </div>

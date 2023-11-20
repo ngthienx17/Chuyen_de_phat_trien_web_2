@@ -10,8 +10,7 @@ use Livewire\WithPagination;
 class AdminCategoryComponent extends Component
 {
     use WithPagination;
-    
-    public $action;
+
     public $selectedItem;
     public function selectItem($itemId)
     {

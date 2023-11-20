@@ -7,16 +7,20 @@ use Livewire\Component;
 
 class AdminHomeSliderComponent extends Component
 {
-    public function deleteSlider($slider_id)
+    public $selectedItem;
+    public function selectItem($selectedItem)
     {
-        $slider = HomeSlider::find($slider_id);
+        $this->selectedItem = $selectedItem;
+    }
+    public function deleteSlider()
+    {
+        $slider = HomeSlider::find($this->selectedItem);
         if ($slider) {
             # code...
             $slider->delete();
             session()->flash('message', 'Xóa Slider thành công!');
-        }else{
+        } else {
             session()->flash('error-message', 'Không tìm thấy slider này!');
-
         }
     }
     public function render()

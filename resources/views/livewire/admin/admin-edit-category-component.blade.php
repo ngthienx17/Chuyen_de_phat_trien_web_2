@@ -1,4 +1,4 @@
-{{-- <div class="card">
+<div class="card">
     <div class="container" style="padding:30px;">
         <div class="row">
             <div class="col-md-12">
@@ -9,14 +9,16 @@
                                 Edit Category
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('admin.categories') }}" class="btn btn-success pull-right">All
+                                <a href="{{ route('admin.categories') }}"
+                                    class="btn btn-success pull-right">All
                                     Categories</a>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        @if (Session::has('message'))
-                            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                        @if(Session::has('message'))
+                            <div class="alert alert-success" role="alert">
+                                {{ Session::get('message') }}</div>
                         @endif
                         <form class="form-horizontal" wire:submit.prevent="updateCategory">
                             <div class="mb-3 row">
@@ -52,29 +54,3 @@
         </div>
     </div>
 </div>
-<!-- Edit --> --}}
-<div class="mb-3 row">
-    <label class="col-md-4 control-label">Category Name</label>
-    <div class="col-md-4">
-        <input type="text" class="form-control input-md" placeholder="Category Name" wire:model="name"
-            wire:keyup="generateslug">
-        @error('name')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
-</div>
-<div class="mb-3 row">
-    <label class="col-md-4 control-label">Category Slug</label>
-    <div class="col-md-4">
-        <input type="text" class="form-control input-md" placeholder="Category Slug" wire:model="slug">
-        @error('slug')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
-</div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-        Close
-    </button>
-    <button type="button" class="btn btn-primary">Save changes</button>

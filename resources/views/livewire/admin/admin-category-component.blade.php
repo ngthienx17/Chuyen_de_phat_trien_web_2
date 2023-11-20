@@ -31,7 +31,7 @@
                     <div class="panel-body">
                         @if (Session::has('message'))
                             <div class="alert alert-success" role="aler">{{ Session::get('message') }}</div>
-                            @elseif (Session::has('error-message'))
+                        @elseif (Session::has('error-message'))
                             <div class="alert alert-danger" role="aler">{{ Session::get('error-message') }}</div>
                         @endif
                         <table class="table table-striped">
@@ -50,19 +50,68 @@
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#modalFormEdit"
+                                                wire:click="mount({{ $category->slug }})">
+                                                Edit
+                                            </button>
                                             <a
                                                 href="{{ route('admin.editcategory', ['category_slug' => $category->slug]) }}"><i
                                                     class="fa fa-edit fa-2x"></i></a>
-                                            <a href="#" wire:click.prevent="deleteCategory({{ $category->id }})"
-                                                wire:confirm="Bạn có chắc chắn?\n\nXóa dữ liệu: {{$category->name}}"
-                                                style="margin-left:10px;"><i
-                                                    class="fa fa-times fa-2x text-danger"></i></a>
+                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modalFormDelete"
+                                                wire:click="selectItem({{ $category->id }})">
+                                                Delete
+                                            </button>
+
+
+
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
                         {{ $categories->links() }}
+                    </div>
+                    <!-- Modal -->
+                    {{-- Delete --}}
+                    <div class="modal fade" id="modalFormDelete" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCenterTitle">Cảnh báo
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc chắn muốn xóa danh mục ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                        Đóng
+                                    </button>
+                                    <button type="button" class="btn btn-primary" wire:click.prevent="deleteCategory"
+                                        data-bs-dismiss="modal">Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Edit --}}
+                    <div class="modal fade" id="modalFormEdit" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCenterTitle">Edit</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    @livewire('admin.admin-edit-category-component')
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

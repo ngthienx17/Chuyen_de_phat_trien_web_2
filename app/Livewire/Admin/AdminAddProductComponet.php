@@ -35,6 +35,22 @@ class AdminAddProductComponet extends Component
     {
         $this->slug = Str::slug($this->name, '-');
     }
+    public function updated($fields) {  
+        $this->validateOnly($fields,[
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products',
+            'short_description' => 'required|string',
+            'description' => 'required|string',
+            'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'numeric',
+            'SKU' => 'required|string|max:255|unique:products',
+            'stock_status' => 'required',
+            'quantity' => 'required|numeric|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'category_id'=>'required'
+        ]);
+        
+    }
     public function addProduct()
     {
         // Validate the form data
@@ -44,10 +60,12 @@ class AdminAddProductComponet extends Component
             'short_description' => 'required|string',
             'description' => 'required|string',
             'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'numeric',
             'SKU' => 'required|string|max:255|unique:products',
-            'quantity' => 'required|integer|min:0',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required|exists:categories,id', // Make sure the category exists
+            'stock_status' => 'required',
+            'quantity' => 'required|numeric|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'category_id'=>'required'
         ]);
 
         $product = new Product();
@@ -67,8 +85,6 @@ class AdminAddProductComponet extends Component
         $product->category_id = $this->category_id;
         $product->save();
         session()->flash('message', 'Thêm sản phẩm thành công!');
-        return redirect()->to('/admin/products');
-
     }
     public function render()
     {

@@ -10,19 +10,26 @@ use Livewire\WithPagination;
 class AdminCategoryComponent extends Component
 {
     use WithPagination;
-    public function deleteCategory($id)
+    
+    public $action;
+    public $selectedItem;
+    public function selectItem($itemId)
     {
-        $categories = Category::find($id);
+        $this->selectedItem = $itemId;
+    }
+    public function deleteCategory()
+    {
+        $categories = Category::find($this->selectedItem);
         if ($categories) {
             $categories->delete();
             session()->flash('message', 'Xóa danh mục thành công!');
-        }else{
+        } else {
             session()->flash('error-message', 'Xóa danh mục thất bại');
         }
     }
     public function render()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::orderBy('name','DESC')->paginate(5);
         return view('livewire.admin.admin-category-component', ['categories' => $categories])->layout('layouts.admin-base');
     }
 }

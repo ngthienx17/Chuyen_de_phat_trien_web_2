@@ -30,7 +30,7 @@
                                     <input type="text" placeholder="Title" class="form-control input-md"
                                         wire:model = "title">
                                     @error('title')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                     <input type="text" placeholder="Subtitle" class="form-control input-md"
                                         wire:model = "subtitle">
                                     @error('subtitle')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                     <input type="text" placeholder="Price" class="form-control input-md"
                                         wire:model = "price">
                                     @error('price')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                     <input type="text" placeholder="Link" class="form-control input-md"
                                         wire:model = "link">
                                     @error('link')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                 <div class="col-md-4">
                                     <input type="file" class="input-file" wire:model = "newImage">
                                     @error('newImage')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                     @if ($newImage)
                                         <img src="{{ $newImage->temporaryUrl() }}" width="120" />

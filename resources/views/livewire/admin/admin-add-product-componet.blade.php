@@ -27,7 +27,7 @@
                                     <input type="text" class="form-control input-md" placeholder="Product Name"
                                         wire:model="name" wire:keyup="generateslug">
                                     @error('name')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                     <input type="text" class="form-control input-md" placeholder="Product Slug"
                                         wire:model="slug">
                                     @error('slug')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                 <div class="col-md-4">
                                     <textarea type="text" class="form-control input-md" placeholder="Short Description" wire:model="short_description"></textarea>
                                     @error('short_description')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -54,6 +54,9 @@
                                 <label class="col-md-4 control-label">Description</label>
                                 <div class="col-md-4">
                                     <textarea type="text" class="form-control input-md" placeholder="Description" wire:model="description"></textarea>
+                                    @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -61,8 +64,8 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Regular Price"
                                         wire:model="regular_price">
-                                        @error('regular_price')
-                                        <span class="error">{{ $message }}</span>
+                                    @error('regular_price')
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -71,6 +74,9 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Sale Price"
                                         wire:model="sale_price">
+                                        @error('sale_price')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -78,8 +84,8 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="SKU"
                                         wire:model="SKU">
-                                        @error('SKU')
-                                        <span class="error">{{ $message }}</span>
+                                    @error('SKU')
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -106,8 +112,8 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Quantity"
                                         wire:model="quantity">
-                                        @error('quantity')
-                                        <span class="error">{{ $message }}</span>
+                                    @error('quantity')
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -116,7 +122,7 @@
                                 <div class="col-md-4">
                                     <input type="file" class="form-control input-md" wire:model="image" />
                                     @error('image')
-                                        <span class="error">{{ $message }}</span>
+                                        <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                     @if ($image)
                                         <img src="{{ $image->temporaryUrl() }}" width="60" />
@@ -133,9 +139,10 @@
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
 
-                                    </select>@error('category_id')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
+                                    </select>
+                                    @error('category_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">

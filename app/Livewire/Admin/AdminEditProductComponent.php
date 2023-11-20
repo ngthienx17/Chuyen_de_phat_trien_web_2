@@ -49,19 +49,38 @@ class AdminEditProductComponent extends Component
     {
         $this->slug = Str::slug($this->name, '-');
     }
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products',
+            'short_description' => 'required|string',
+            'description' => 'required|string',
+            'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'numeric',
+            'SKU' => 'required|string|max:255',
+            'stock_status' => 'required',
+            'quantity' => 'required|numeric|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'category_id' => 'required'
+        ]);
+    }
+
 
     public function updateProduct()
     {
         // Validate the form data
         $this->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products',
             'short_description' => 'required|string',
             'description' => 'required|string',
             'regular_price' => 'required|numeric|min:0',
+            'sale_price' => 'numeric',
             'SKU' => 'required|string|max:255',
-            'quantity' => 'required|integer|min:0',
-            'category_id' => 'required|exists:categories,id', // Make sure the category exists
+            'stock_status' => 'required',
+            'quantity' => 'required|numeric|min:0',
+            'category_id' => 'required'
         ]);
         $product = Product::find($this->product_id);
         $product->name = $this->name;

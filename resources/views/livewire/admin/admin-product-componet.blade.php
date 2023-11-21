@@ -91,34 +91,36 @@
 
                                                             Bạn có chắc chắn muốn xóa sản phẩm
                                                             @if ($product = $products->firstWhere('id', $selectedItem))
-                                                {{ $product->name }}
-                                                        @else
+                                                            {{ $product->name }}
+                                                            @else
                                                             Product not found.
-                                @endif
+                                                            @endif
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                                data-bs-dismiss="modal">
+                                                                Đóng
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                wire:click.prevent="deleteProduct"
+                                                                data-bs-dismiss="modal">Xóa</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                        {{ $products->links() }}
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Đóng
-                        </button>
-                        <button type="button" class="btn btn-primary" wire:click.prevent="deleteProduct"
-                            data-bs-dismiss="modal">Xóa</button>
-                    </div>
+
                 </div>
             </div>
         </div>
-        </td>
-        </tr>
-        @endforeach
-
-        </tbody>
-        </table>
-        {{ $products->links() }}
-
     </div>
-
-</div>
-</div>
-</div>
-</div>
 </div>

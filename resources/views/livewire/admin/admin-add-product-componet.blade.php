@@ -1,3 +1,10 @@
+@push('styles')
+    <style>
+        .tox-statusbar__right-container{
+            display: none !important;
+        }
+    </style>
+@endpush
 <div class="card">
     <div class="container" style="padding:30px;">
         <div class="row">
@@ -22,7 +29,7 @@
                         @endif
                         <form class="form-horizontal" wire:submit.prevent="addProduct" enctype="multipart/form-data">
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Product Name</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Product Name</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Product Name"
                                         wire:model="name" wire:keyup="generateslug">
@@ -32,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Product Slug</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Product Slug</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Product Slug"
                                         wire:model="slug">
@@ -41,26 +48,31 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Short Description</label>
-                                <div class="col-md-4">
-                                    <textarea type="text" class="form-control input-md" placeholder="Short Description" wire:model="short_description"></textarea>
+                            <div id="snow-editor" class="ql-toolbar ql-snow"></div>
+                            <div class="mb-3 row ">
+                                <label class="col-sm-3 col-form-label text-sm-end">Short Description</label>
+                                <div class="col-md-4" wire:ignore>
+                                    <textarea type="text" class="form-control input-md" id="short_description" placeholder="Short Description"
+                                        wire:model="short_description"></textarea>
                                     @error('short_description')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Description</label>
-                                <div class="col-md-4">
-                                    <textarea type="text" class="form-control input-md" placeholder="Description" wire:model="description"></textarea>
+                                <label class="col-sm-3 col-form-label text-sm-end">Description</label>
+                                <div class="col-md-4" wire:ignore>
+                                    <textarea type="text" class="form-control input-md" id="description" placeholder="Description"
+                                        wire:model="description"></textarea>
                                     @error('description')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Regular Price</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Regular Price</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Regular Price"
                                         wire:model="regular_price">
@@ -70,17 +82,17 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Sale Price</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Sale Price</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Sale Price"
                                         wire:model="sale_price">
-                                        @error('sale_price')
+                                    @error('sale_price')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">SKU</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">SKU</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="SKU"
                                         wire:model="SKU">
@@ -90,7 +102,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Kho </label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Kho </label>
                                 <div class="col-md-4">
                                     <select class="form-control" wire:model="stock_status">
                                         <option value="instock">Trong Kho</option>
@@ -99,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Nổi Bật</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Nổi Bật</label>
                                 <div class="col-md-4">
                                     <select class="form-control" wire:model="featured">
                                         <option value="0">Không</option>
@@ -108,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Quantity</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Quantity</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control input-md" placeholder="Quantity"
                                         wire:model="quantity">
@@ -118,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Hình Ảnh Sản Phẩm</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Hình Ảnh Sản Phẩm</label>
                                 <div class="col-md-4">
                                     <input type="file" class="form-control input-md" wire:model="image" />
                                     @error('image')
@@ -130,7 +142,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label">Nhóm Hàng</label>
+                                <label class="col-sm-3 col-form-label text-sm-end">Nhóm Hàng</label>
                                 <div class="col-md-4">
                                     <select class="form-control" wire:model="category_id">
 
@@ -146,7 +158,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label class="col-md-4 control-label"></label>
+                                <label class="col-sm-3 col-form-label text-sm-end"></label>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-primary pull-right">Submit</button>
                                 </div>
@@ -158,3 +170,31 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        $(function() {
+            tinymce.init({
+                selector: '#short_description',
+                setup: function(editor) {
+                    editor.on('Change', function(e) {
+                        tinyMCE.triggerSave();
+                        var sd_data = $('#short_description').val();
+                        console.log(sd_data);
+                        @this.set('short_description', sd_data);
+                        console.log('a');
+                    });
+                }
+            });
+            tinymce.init({
+                selector: '#description',
+                setup: function(editor) {
+                    editor.on('Change', function(e) {
+                        tinyMCE.triggerSave();
+                        var d_data = $('#description').val();
+                        @this.set('description', d_data);
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

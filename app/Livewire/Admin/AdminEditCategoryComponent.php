@@ -28,7 +28,7 @@ class AdminEditCategoryComponent extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:categories',
             'slug' => 'required|string|max:255|unique:categories',
         ]);
     }

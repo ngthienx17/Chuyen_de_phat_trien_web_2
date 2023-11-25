@@ -11,10 +11,10 @@
                             <img src="{{ asset('assets/images/sliders') }}/{{ $slider->image }}" alt=""
                                 class="img-slide">
                             <div class="slide-info slide-1">
-                                <h2 class="f-title"><b>{{ $slider->title }}</b></h2>
-                                <span class="subtitle">{{ $slider->subtitle }}</span>
-                                <p class="sale-info">Only price: <span class="price">{{ $slider->price }}</span></p>
-                                <a href="{{ $slider->link }}" class="btn-link">Shop Now</a>
+                                <h2 class="f-title text-success"><b>{{ $slider->title }}</b></h2>
+                                <span class="subtitle pb-2">{{ $slider->subtitle }}</span>
+                                <br>
+                                <a href="{{ $slider->link }}" class="btn-link pull-right">Shop Now</a>
                             </div>
                         </div>
                     @endforeach

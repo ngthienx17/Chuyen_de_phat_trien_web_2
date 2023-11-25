@@ -69,46 +69,13 @@
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('admin.editproduct', ['product_slug' => $product->slug]) }}"><i
                                                     class='bx bx-edit'></i> Edit</a>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#modalFormDelete"
-                                                wire:click="selectItem({{ $product->id }})">
+                                            <button class="btn btn-sm btn-danger"
+                                                wire:confirm="Bạn có chắc chắn muốn xóa?"
+                                                wire:click=" selectItem({{ $product->id }})">
                                                 <i class='bx bx-trash'></i>
                                                 Delete
                                             </button>
-                                            <!-- Modal -->
-                                            <!-- {{-- Delete --}} -->
-                                            <div class="modal fade" id="modalFormDelete" tabindex="-1"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalCenterTitle">Cảnh báo
-                                                            </h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
 
-                                                            Bạn có chắc chắn muốn xóa sản phẩm
-                                                            @if ($product = $products->firstWhere('id', $selectedItem))
-                                                            {{ $product->name }}
-                                                            @else
-                                                            Product not found.
-                                                            @endif
-
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-secondary"
-                                                                data-bs-dismiss="modal">
-                                                                Đóng
-                                                            </button>
-                                                            <button type="button" class="btn btn-primary"
-                                                                wire:click.prevent="deleteProduct"
-                                                                data-bs-dismiss="modal">Xóa</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

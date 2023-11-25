@@ -53,8 +53,9 @@
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('admin.editcategory', ['category_slug' => $category->slug]) }}"><i
                                                     class='bx bx-edit'></i> Edit</a>
-                                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#modalFormDelete"
+                                            <button
+                                                class="btn btn-sm btn-danger"
+                                                wire:confirm="Bạn có chắc chắn muốn xóa?"
                                                 wire:click="selectItem({{ $category->id }})">
                                                 <i class='bx bx-trash'></i>
                                                 Delete
@@ -67,30 +68,7 @@
                         </table>
                         {{ $categories->links() }}
                     </div>
-                    <!-- Modal -->
-                    {{-- Delete --}}
-                    <div class="modal fade" id="modalFormDelete" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalCenterTitle">Cảnh báo
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Bạn có chắc chắn muốn xóa danh mục ?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                        Đóng
-                                    </button>
-                                    <button type="button" class="btn btn-primary" wire:click.prevent="deleteCategory"
-                                        data-bs-dismiss="modal">Xóa</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

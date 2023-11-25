@@ -18,15 +18,15 @@ class AdminAddCategoryComponent extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories',
+            'name' => 'required|string|max:255|unique:categories',
+            'slug' => 'required|string|max:255|unique:categories,slug',
         ]);
     }
     public function storeCategory()
     {
         // Thực hiện validation
         $this->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:categories',
             'slug' => 'required|string|max:255|unique:categories',
         ]);
         $category = new Category();

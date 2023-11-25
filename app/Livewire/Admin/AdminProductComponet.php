@@ -13,6 +13,15 @@ class AdminProductComponet extends Component
     public function selectItem($itemId)
     {
         $this->selectedItem = $itemId;
+        $product = Product::find($this->selectedItem);
+        if ($product) {
+            # code...
+            $product->delete();
+            session()->flash('message', 'Xóa sản phẩm thành công!');
+        }else{
+            session()->flash('error-message', 'Sản phẩm không tồn tại!');
+
+        }
     }
    
     public function deleteProduct()

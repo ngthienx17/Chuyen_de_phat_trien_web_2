@@ -64,18 +64,18 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
     //Category
     Route::get('/admin/categories', AdminCategoryComponent::class)->name('admin.categories');
-    Route::get('/admin/category/add', AdminAddCategoryComponent::class)->name('admin.addcategory');
-    Route::get('/admin/category/edit/{category_slug}', AdminEditCategoryComponent::class)->name('admin.editcategory');
+    Route::get('/admin/categories/add', AdminAddCategoryComponent::class)->name('admin.addcategory');
+    Route::get('/admin/categories/edit/{category_slug}', AdminEditCategoryComponent::class)->name('admin.editcategory');
     //Product
     Route::get('/admin/products', AdminProductComponet::class)->name('admin.products');
-    Route::get('/admin/product/add', AdminAddProductComponet::class)->name('admin.addproduct');
-    Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
+    Route::get('/admin/products/add', AdminAddProductComponet::class)->name('admin.addproduct');
+    Route::get('/admin/products/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
     //HomeSlider
     Route::get('/admin/slider', AdminHomeSliderComponent::class)->name('admin.homeslider');
     Route::get('/admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.addhomeslider');
     Route::get('/admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.edithomeslider');
     //Admin Home Category
-    Route::get('/admin/home-categories', AdminHomeCategoryComponent::class)->name('admin.homecategories');
+    Route::get('/admin/home-category', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     //Admin Sale Date
     Route::get('admin/sale', AdminSaleComponent::class)->name('admin.sale');
 });

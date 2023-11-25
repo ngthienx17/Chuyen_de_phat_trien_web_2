@@ -53,7 +53,7 @@ class AdminEditProductComponent extends Component
     {
         $this->validateOnly($fields, [
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:products',
+            'slug' => 'required|string|max:255',
             'short_description' => 'required|string',
             'description' => 'required|string',
             'regular_price' => 'required|numeric|min:0',
@@ -72,7 +72,7 @@ class AdminEditProductComponent extends Component
         // Validate the form data
         $this->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:products',
+            'slug' => 'required|string|max:255',
             'short_description' => 'required|string',
             'description' => 'required|string',
             'regular_price' => 'required|numeric|min:0',

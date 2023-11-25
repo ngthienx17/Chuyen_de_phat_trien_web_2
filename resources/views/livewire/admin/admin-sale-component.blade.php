@@ -48,6 +48,9 @@
                         <div class="col-md-4">
                             <input type="text" placeholder="YYYY/MM/DD H:M:S" id="saleDate"
                                 class="form-control input-md" wire:model="sale_date">
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="mb-3 row">

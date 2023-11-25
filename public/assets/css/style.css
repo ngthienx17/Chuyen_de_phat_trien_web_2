@@ -1007,14 +1007,17 @@ li.menu-item .nav-label.sale-label::before{
 }
 .wrap-main-slide .slide-carousel .slide-info.slide-1{
     top: 30%;
-    left: 40%;
+    left: 50%;
     z-index: 15;
+    width: max-content;
+    background-color: rgba(255,255,255,0.2);
+    padding: 30px;
     transform: translate( 4px, -7px);
-    -webkit-transform: translate( 4px, -7px);
+    -webkit-transform: translate( -50%, -7px);
     -ms-transform: translate( 4px, -7px);
 }
 .wrap-main-slide .slide-carousel .slide-info.slide-2{
-    max-width: 370px;
+    max-width: 500px;
     z-index: 30;
     left: 8%;
     top: 22%;
@@ -1033,26 +1036,26 @@ li.menu-item .nav-label.sale-label::before{
 .wrap-main-slide .slide-1 .f-title{
     font-size: 35px;
     line-height: 28.8px;
-    color: #555555;
+    color: tomato;
     text-transform: uppercase;
     font-weight: 400;
     margin-left: -2px;
 }
 .wrap-main-slide .slide-1 .f-title b{
-    color: #222222;
+    color: red ;
     font-size: 45px;
     font-weight: 700;
 }
 .wrap-main-slide .slide-1 .subtitle{
     font-size: 18px;
     line-height: 24px;
-    color: #555555;
+    color: tomato;
     display: inline-block;
 }
 .wrap-main-slide .slide-1 .sale-info{
     font-size: 16px;
     line-height: 24px;
-    color: #888888;
+    color: tomato;
     margin-top: 6px;
     margin-bottom: 19px;
 }
@@ -1089,7 +1092,7 @@ li.menu-item .nav-label.sale-label::before{
 .wrap-main-slide .slide-2 .f-subtitle{
     font-size: 18px;
     line-height: 24px;
-    color: #555555;
+    color: plum;
     display: inline-block;
 }
 .wrap-main-slide .slide-2 .discount-code{

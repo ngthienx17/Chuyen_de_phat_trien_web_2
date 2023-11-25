@@ -39,8 +39,8 @@ class AdminAddProductComponet extends Component
         $this->validateOnly($fields,[
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products',
-            'short_description' => 'required|string',
-            'description' => 'required|string',
+            'short_description' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'regular_price' => 'required|numeric|min:0',
             'sale_price' => 'numeric',
             'SKU' => 'required|string|max:255|unique:products',
@@ -57,8 +57,8 @@ class AdminAddProductComponet extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products',
-            'short_description' => 'required|string',
-            'description' => 'required|string',
+            'short_description' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'regular_price' => 'required|numeric|min:0',
             'sale_price' => 'numeric',
             'SKU' => 'required|string|max:255|unique:products',

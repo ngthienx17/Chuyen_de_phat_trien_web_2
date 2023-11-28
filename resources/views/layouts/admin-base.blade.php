@@ -12,13 +12,12 @@
 =========================================================
  -->
 <!-- beautify ignore:start -->
-<html  lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('admin/assets/') }}" data-template="vertical-menu-template-free">
+<html  lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('admin/assets/') }}" data-template="vertical-menu-template-free">
   <head>
     <meta charset="utf-8" />
     <meta   name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard</title>
-
+    <title>{{ $title ?? 'Dashboard' }}</title>
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -68,7 +67,7 @@
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo mb-3">
           <a href="{{ asset('/') }}" class="app-brand-link">
-            <img class="app-brand-text demo menu-text fw-bolder ms-2" src="{{ asset('assets/images/logo-top-1.png' )}}"></img>
+            <img class="app-brand-text demo menu-text fw-bolder ms-2" src="{{ asset('assets/images/logo-top-1.png' ) }}"></img>
           </a>
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>

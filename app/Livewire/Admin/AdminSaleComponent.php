@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Sale;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class AdminSaleComponent extends Component
@@ -34,9 +35,9 @@ class AdminSaleComponent extends Component
        
         
     }
-
+    #[Layout('layouts.admin-base')]
     public function render()
     {
-        return view('livewire.admin.admin-sale-component')->layout('layouts.admin-base');
+        return view('livewire.admin.admin-sale-component');
     }
 }

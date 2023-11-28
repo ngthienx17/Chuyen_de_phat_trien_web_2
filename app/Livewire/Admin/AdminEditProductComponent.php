@@ -8,7 +8,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
-
+use Livewire\Attributes\Layout;
 
 class AdminEditProductComponent extends Component
 {
@@ -104,10 +104,10 @@ class AdminEditProductComponent extends Component
         session()->flash('message', 'Sửa sản phẩm thành công!');
         return redirect()->to('/admin/products');
     }
-
+    #[Layout('layouts.admin-base')]
     public function render()
     {
         $categories = Category::all();
-        return view('livewire.admin.admin-edit-product-component', ['categories' => $categories])->layout('layouts.admin-base');
+        return view('livewire.admin.admin-edit-product-component', ['categories' => $categories]);
     }
 }

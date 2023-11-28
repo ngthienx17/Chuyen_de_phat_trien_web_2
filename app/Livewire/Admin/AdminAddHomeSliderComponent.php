@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\HomeSlider;
 use Carbon\Carbon;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -46,9 +47,9 @@ class AdminAddHomeSliderComponent extends Component
         return redirect()->to('/admin/slider');
 
     }
-
+    #[Layout('layouts.admin-base')]
     public function render()
     {
-        return view('livewire.admin.admin-add-home-slider-component')->layout('layouts.admin-base');
+        return view('livewire.admin.admin-add-home-slider-component');
     }
 }

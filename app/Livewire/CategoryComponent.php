@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 
 class CategoryComponent extends Component
@@ -29,6 +30,8 @@ class CategoryComponent extends Component
         return redirect()->route('product.cart');
     }
     use WithPagination;
+    #[Layout('layouts.base')]
+
     public function render()
     {
         $category = Category::where('slug', $this->category_slug)->first();
@@ -47,6 +50,6 @@ class CategoryComponent extends Component
 
         $categories = Category::all();
 
-        return view('livewire.category-component', ['products' => $products, 'categories' => $categories, 'category_name' => $category_name])->layout('layouts.base');
+        return view('livewire.category-component', ['products' => $products, 'categories' => $categories, 'category_name' => $category_name]);
     }
 }

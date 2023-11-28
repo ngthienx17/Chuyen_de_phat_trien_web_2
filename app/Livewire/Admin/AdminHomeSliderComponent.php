@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\HomeSlider;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class AdminHomeSliderComponent extends Component
@@ -31,9 +32,10 @@ class AdminHomeSliderComponent extends Component
             session()->flash('error-message', 'Không tìm thấy slider này!');
         }
     }
+    #[Layout('layouts.admin-base')]
     public function render()
     {
         $sliders = HomeSlider::all();
-        return view('livewire.admin.admin-home-slider-component', ['sliders' => $sliders])->layout('layouts.admin-base');
+        return view('livewire.admin.admin-home-slider-component', ['sliders' => $sliders]);
     }
 }

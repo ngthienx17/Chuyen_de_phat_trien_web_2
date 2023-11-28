@@ -7,6 +7,7 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 use Livewire\WithFileUploads;
 
 class AdminAddProductComponet extends Component
@@ -86,9 +87,10 @@ class AdminAddProductComponet extends Component
         $product->save();
         session()->flash('message', 'Thêm sản phẩm thành công!');
     }
+    #[Layout('layouts.admin-base')]
     public function render()
     {
         $categories = Category::all();
-        return view('livewire.admin.admin-add-product-componet', ['categories' => $categories])->layout('layouts.admin-base');
+        return view('livewire.admin.admin-add-product-componet', ['categories' => $categories]);
     }
 }

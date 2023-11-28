@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -34,6 +35,7 @@ class SearchComponent extends Component
         return redirect()->route('product.cart');
     }
     use WithPagination;
+    #[Layout('layouts.base')]
     public function render()
     {
         if ($this->sorting == 'date') {
@@ -48,6 +50,6 @@ class SearchComponent extends Component
 
         $categories = Category::all();
 
-        return view('livewire.search-component', ['products' => $products, 'categories' => $categories])->layout('layouts.base');
+        return view('livewire.search-component', ['products' => $products, 'categories' => $categories]);
     }
 }

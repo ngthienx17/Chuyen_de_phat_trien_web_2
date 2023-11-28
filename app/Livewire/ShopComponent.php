@@ -5,15 +5,26 @@ namespace App\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\Livewire;
 use Livewire\WithPagination;
 
 class ShopComponent extends Component
 {
+    public $wishlistItems = [];
+
     public $sorting;
     public $pagesize;
     public $min_price;
     public $max_price;
+    protected $listeners = ['priceUpdated' => 'updatePrices'];
+
+    public function updatePrices($data)
+    {
+        $this->min_price = $data['min_price'];
+        $this->max_price = $data['max_price'];
+    }
 
     public function mount()
     {
@@ -25,11 +36,29 @@ class ShopComponent extends Component
     }
     public function store($product_id, $product_name, $product_price)
     {
-        Cart::add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
         session()->flash('success_message', 'Item added in Cart');
         return redirect()->route('product.cart');
     }
+
+    public function addToWishlist($product_id, $product_name, $product_price)
+    {
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        $this->dispatch('refreshComponent')->to('wishlist-count-component');
+    }
+
+    public function removeFromWishlist($productId)
+    {
+        foreach (Cart::instance('wishlist')->content() as $witem) {
+            if ($witem->id == $productId) {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                $this->dispatch('refreshComponent')->to('wishlist-count-component');
+                return;
+            }
+        }
+    }
     use WithPagination;
+    #[Layout('layouts.base')]
     public function render()
     {
         if ($this->sorting == 'date') {
@@ -44,6 +73,8 @@ class ShopComponent extends Component
 
         $categories = Category::all();
 
-        return view('livewire.shop-component', ['products' => $products, 'categories' => $categories])->layout('layouts.base');
+        $popular_products = Product::inRandomOrder()->limit(4)->get();
+
+        return view('livewire.shop-component', ['products' => $products, 'categories' => $categories, 'popular_products' => $popular_products]);
     }
 }

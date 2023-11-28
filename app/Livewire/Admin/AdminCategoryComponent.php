@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Category;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -34,9 +35,11 @@ class AdminCategoryComponent extends Component
     //         session()->flash('error-message', 'Xóa danh mục thất bại');
     //     }
     // }
+    #[Layout('layouts.admin-base')]
+
     public function render()
     {
         $categories = Category::orderBy('name','DESC')->paginate(5);
-        return view('livewire.admin.admin-category-component', ['categories' => $categories])->layout('layouts.admin-base');
+        return view('livewire.admin.admin-category-component', ['categories' => $categories]);
     }
 }

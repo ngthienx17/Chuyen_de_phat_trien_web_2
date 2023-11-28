@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 
 class AdminEditCategoryComponent extends Component
 {
@@ -47,8 +48,10 @@ class AdminEditCategoryComponent extends Component
         $category->save();
         session()->flash('message', 'Cập nhật danh mục thành công!');
     }
+    #[Layout('layouts.admin-base')]
+
     public function render()
     {
-        return view('livewire.admin.admin-edit-category-component')->layout('layouts.admin-base');
+        return view('livewire.admin.admin-edit-category-component');
     }
 }

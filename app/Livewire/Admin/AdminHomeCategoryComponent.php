@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Category;
 use App\Models\HomeCategory;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 class AdminHomeCategoryComponent extends Component
@@ -25,9 +26,10 @@ class AdminHomeCategoryComponent extends Component
         $category->save();
         session()->flash('message', 'Cập nhật HomeCategory thành công!');
     }
+    #[Layout('layouts.admin-base')]
     public function render()
     {
         $categories = Category::all();
-        return view('livewire.admin.admin-home-category-component', ['categories' => $categories])->layout('layouts.admin-base');
+        return view('livewire.admin.admin-home-category-component', ['categories' => $categories]);
     }
 }

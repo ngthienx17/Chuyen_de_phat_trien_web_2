@@ -59,7 +59,7 @@
                                                         class='bx bx-edit'></i> Edit</a>
                                                 <button class="btn btn-sm btn-danger"
                                                     wire:confirm="Bạn có chắc chắn muốn xóa?"
-                                                    wire:click="selectItem({{ $slider->id }})">
+                                                    wire:click.prevent="selectItem({{ $slider->id }})">
                                                     <i class='bx bx-trash'></i>
                                                     Delete
                                                 </button>

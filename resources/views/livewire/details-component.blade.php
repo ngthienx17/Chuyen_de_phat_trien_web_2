@@ -47,19 +47,19 @@
                             {!! $product->short_description !!}
                         </div>
                         <div class="wrap-social">
-                            <a class="link-socail" href="#"><img
-                                    src="{{ asset('assets/images/social-list.png') }}" alt=""></a>
+                            <a class="link-socail" href="#"><img src="{{ asset('assets/images/social-list.png') }}"
+                                    alt=""></a>
                         </div>
                         @if ($product->sale_price && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
-                            <div class="wrap-price">
-                                <p class="product-price">{{ $product->sale_price }}</p>
-                                <del>
-                                    <p class="product-price regprice">{{ $product->regular_price }}</p>
-                                </del>
-                            </div>
+                        <div class="wrap-price">
+                            <p class="product-price">{{ $product->sale_price }}</p>
+                            <del>
+                                <p class="product-price regprice">{{ $product->regular_price }}</p>
+                            </del>
+                        </div>
                         @else
-                            <div class="wrap-price"><span class="product-price">{{ $product->regular_price }}</span>
-                            </div>
+                        <div class="wrap-price"><span class="product-price">{{ $product->regular_price }}</span>
+                        </div>
                         @endif
                         <div class="stock-info in-stock">
                             <p class="availability">Availability: <b>{{ $product->stock_status }}</b></p>
@@ -67,26 +67,38 @@
                         <div class="quantity">
                             <span>Quantity:</span>
                             <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120"
-                                    pattern="[0-9]*">
+                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*"
+                                    wire:model="qty">
 
-                                <a class="btn btn-reduce" href="#"></a>
-                                <a class="btn btn-increase" href="#"></a>
+                                <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQunatity"></a>
+                                <a class="btn btn-increase" href="#" wire:click.prevent="increaseQunatity"></a>
                             </div>
                         </div>
                         <div class="wrap-butons">
-                            @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
-                                <a href="#" class="btn add-to-cart"
-                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->sale_price }})">Add
-                                    to Cart with Sale</a>
+                            @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date >
+                            Carbon\Carbon::now())
+                            <a href="#" class="btn add-to-cart"
+                                wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->sale_price }})">Add
+                                to Cart with Sale</a>
                             @else
-                                <a href="#" class="btn add-to-cart"
-                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})">Add
-                                    to Cart</a>
+                            <a href="#" class="btn add-to-cart"
+                                wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})">Add
+                                to Cart</a>
                             @endif
                             <div class="wrap-btn">
                                 <a href="#" class="btn btn-compare">Add Compare</a>
-                                <a href="#" class="btn btn-wishlist">Add Wishlist</a>
+                                @if (Cart::instance('wishlist')
+                                ->content()
+                                ->pluck('id')->contains($product->id))
+
+                                <a href="#" wire:click.prevent="removeFromWishlist({{ $product->id }})" class="btn btn-wishlist fill-wishlist">Remove Wishlist</a>
+                                @else
+                                <a href="#"
+                                    wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}',{{ $product->regular_price }})"
+                                    class="btn btn-wishlist">Add Wishlist</a>
+                                @endif
+
+
                             </div>
                         </div>
                     </div>
@@ -131,8 +143,7 @@
                                             <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1"
                                                 id="li-comment-20">
                                                 <div id="comment-20" class="comment_container">
-                                                    <img alt=""
-                                                        src="{{ asset('assets/images/author-avata.jpg') }}"
+                                                    <img alt="" src="{{ asset('assets/images/author-avata.jpg') }}"
                                                         height="80" width="80">
                                                     <div class="comment-text">
                                                         <div class="star-rating">
@@ -159,8 +170,8 @@
                                         <div id="review_form">
                                             <div id="respond" class="comment-respond">
 
-                                                <form action="#" method="post" id="commentform"
-                                                    class="comment-form" novalidate="">
+                                                <form action="#" method="post" id="commentform" class="comment-form"
+                                                    novalidate="">
                                                     <p class="comment-notes">
                                                         <span id="email-notes">Your email address will not be
                                                             published.</span> Required fields are marked <span
@@ -171,43 +182,35 @@
                                                         <p class="stars">
 
                                                             <label for="rated-1"></label>
-                                                            <input type="radio" id="rated-1" name="rating"
-                                                                value="1">
+                                                            <input type="radio" id="rated-1" name="rating" value="1">
                                                             <label for="rated-2"></label>
-                                                            <input type="radio" id="rated-2" name="rating"
-                                                                value="2">
+                                                            <input type="radio" id="rated-2" name="rating" value="2">
                                                             <label for="rated-3"></label>
-                                                            <input type="radio" id="rated-3" name="rating"
-                                                                value="3">
+                                                            <input type="radio" id="rated-3" name="rating" value="3">
                                                             <label for="rated-4"></label>
-                                                            <input type="radio" id="rated-4" name="rating"
-                                                                value="4">
+                                                            <input type="radio" id="rated-4" name="rating" value="4">
                                                             <label for="rated-5"></label>
-                                                            <input type="radio" id="rated-5" name="rating"
-                                                                value="5" checked="checked">
+                                                            <input type="radio" id="rated-5" name="rating" value="5"
+                                                                checked="checked">
                                                         </p>
                                                     </div>
                                                     <p class="comment-form-author">
-                                                        <label for="author">Name <span
-                                                                class="required">*</span></label>
-                                                        <input id="author" name="author" type="text"
-                                                            value="">
+                                                        <label for="author">Name <span class="required">*</span></label>
+                                                        <input id="author" name="author" type="text" value="">
                                                     </p>
                                                     <p class="comment-form-email">
-                                                        <label for="email">Email <span
-                                                                class="required">*</span></label>
-                                                        <input id="email" name="email" type="email"
-                                                            value="">
+                                                        <label for="email">Email <span class="required">*</span></label>
+                                                        <input id="email" name="email" type="email" value="">
                                                     </p>
                                                     <p class="comment-form-comment">
-                                                        <label for="comment">Your review <span
-                                                                class="required">*</span>
+                                                        <label for="comment">Your review <span class="required">*</span>
                                                         </label>
-                                                        <textarea id="comment" name="comment" cols="45" rows="8"></textarea>
+                                                        <textarea id="comment" name="comment" cols="45"
+                                                            rows="8"></textarea>
                                                     </p>
                                                     <p class="form-submit">
-                                                        <input name="submit" type="submit" id="submit"
-                                                            class="submit" value="Submit">
+                                                        <input name="submit" type="submit" id="submit" class="submit"
+                                                            value="Submit">
                                                     </p>
                                                 </form>
 
@@ -220,7 +223,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!--end main products area-->
+            </div>
+            <!--end main products area-->
 
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
                 <div class="widget widget-our-services ">
@@ -268,31 +272,31 @@
                     <div class="widget-content">
                         <ul class="products">
                             @foreach ($popular_products as $item)
-                                <li class="product-item">
-                                    <div class="product product-widget-style">
-                                        <div class="thumbnnail">
-                                            <a href="{{ route('product.details', ['slug' => $item->slug]) }}"
-                                                title="{{ $item->slug }}">
-                                                <figure><img
-                                                        src="{{ asset('assets/images/products') }}/{{ $item->image }}"
-                                                        alt="">
-                                                </figure>
-                                            </a>
-                                        </div>
-                                        <div class="product-info">
-                                            <a href="{{ route('product.details', ['slug' => $item->slug]) }}"
-                                                class="product-name"><span>{{ $item->name }}</span></a>
-                                            <div class="wrap-price"><span
-                                                    class="product-price">{{ $item->regular_price }}</span></div>
-                                        </div>
+                            <li class="product-item">
+                                <div class="product product-widget-style">
+                                    <div class="thumbnnail">
+                                        <a href="{{ route('product.details', ['slug' => $item->slug]) }}"
+                                            title="{{ $item->slug }}">
+                                            <figure><img src="{{ asset('assets/images/products') }}/{{ $item->image }}"
+                                                    alt="">
+                                            </figure>
+                                        </a>
                                     </div>
-                                </li>
+                                    <div class="product-info">
+                                        <a href="{{ route('product.details', ['slug' => $item->slug]) }}"
+                                            class="product-name"><span>{{ $item->name }}</span></a>
+                                        <div class="wrap-price"><span class="product-price">{{ $item->regular_price
+                                                }}</span></div>
+                                    </div>
+                                </div>
+                            </li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
 
-            </div><!--end sitebar-->
+            </div>
+            <!--end sitebar-->
 
             <div class="single-advance-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="wrap-show-advance-info-box style-1 box-in-site">
@@ -303,42 +307,44 @@
                             data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}'>
 
                             @foreach ($related_products as $related_product)
-                                <div class="product product-style-2 equal-elem ">
-                                    <div class="product-thumnail">
-                                        <a href="{{ route('product.details', ['slug' => $related_product->slug]) }}"
-                                            title="{{ $related_product->slug }}">
-                                            <figure><img
-                                                    src="{{ asset('assets/images/products') }}/{{ $related_product->image }}"
-                                                    width="214" height="214"
-                                                    alt="{{ $related_product->slug }}">
-                                            </figure>
-                                        </a>
-                                        <div class="group-flash">
-                                            <span class="flash-item new-label">new</span>
-                                        </div>
-                                        <div class="wrap-btn">
-                                            <a href="#" class="function-link">quick view</a>
-                                        </div>
+                            <div class="product product-style-2 equal-elem ">
+                                <div class="product-thumnail">
+                                    <a href="{{ route('product.details', ['slug' => $related_product->slug]) }}"
+                                        title="{{ $related_product->slug }}">
+                                        <figure><img
+                                                src="{{ asset('assets/images/products') }}/{{ $related_product->image }}"
+                                                width="214" height="214" alt="{{ $related_product->slug }}">
+                                        </figure>
+                                    </a>
+                                    <div class="group-flash">
+                                        <span class="flash-item new-label">new</span>
                                     </div>
-                                    <div class="product-info">
-                                        <a href="{{ route('product.details', ['slug' => $related_product->slug]) }}"
-                                            class="product-name"><span>{{ $related_product->name }}</span></a>
-                                        <div class="wrap-price"><span
-                                                class="product-price">{{ $related_product->regular_price }}</span>
-                                        </div>
+                                    <div class="wrap-btn">
+                                        <a href="#" class="function-link">quick view</a>
                                     </div>
                                 </div>
+                                <div class="product-info">
+                                    <a href="{{ route('product.details', ['slug' => $related_product->slug]) }}"
+                                        class="product-name"><span>{{ $related_product->name }}</span></a>
+                                    <div class="wrap-price"><span class="product-price">{{
+                                            $related_product->regular_price }}</span>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
 
 
                         </div>
-                    </div><!--End wrap-products-->
+                    </div>
+                    <!--End wrap-products-->
                 </div>
             </div>
 
-        </div><!--end row-->
+        </div>
+        <!--end row-->
 
-    </div><!--end container-->
+    </div>
+    <!--end container-->
 
 </main>
 <!--main area-->

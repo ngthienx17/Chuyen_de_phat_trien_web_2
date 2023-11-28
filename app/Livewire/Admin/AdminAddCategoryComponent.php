@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Layout;
 
 class AdminAddCategoryComponent extends Component
 {
@@ -35,9 +36,10 @@ class AdminAddCategoryComponent extends Component
         $category->save();
         session()->flash('message', 'Thêm nhóm hàng mới thành công!');
     }
+    #[Layout('layouts.admin-base')]
     public function render()
     {
 
-        return view('livewire.admin.admin-add-category-component')->layout('layouts.admin-base');
+        return view('livewire.admin.admin-add-category-component');
     }
 }

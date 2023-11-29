@@ -1,17 +1,20 @@
 <?php
 
 use App\Livewire\Admin\AdminAddCategoryComponent;
+use App\Livewire\Admin\Coupon\AdminAddCouponComponent;
 use App\Livewire\Admin\AdminAddHomeSliderComponent;
 use App\Livewire\Admin\AdminAddProductComponet;
 use App\Livewire\Admin\AdminCategoryComponent;
 use App\Livewire\Admin\AdminDashboardComponent;
 use App\Livewire\Admin\AdminEditCategoryComponent;
+use App\Livewire\Admin\Coupon\AdminEditCouponComponent;
 use App\Livewire\Admin\AdminEditHomeSliderComponent;
 use App\Livewire\Admin\AdminEditProductComponent;
 use App\Livewire\Admin\AdminHomeCategoryComponent;
 use App\Livewire\Admin\AdminHomeSliderComponent;
 use App\Livewire\Admin\AdminProductComponet;
 use App\Livewire\Admin\AdminSaleComponent;
+use App\Livewire\Admin\Coupon\AdminCouponComponent;
 use App\Livewire\Cart\CartComponent;
 use App\Livewire\CategoryComponent;
 use App\Livewire\CheckoutComponent;
@@ -80,4 +83,9 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function () 
     Route::get('/admin/home-category', AdminHomeCategoryComponent::class)->name('admin.homecategories');
     //Admin Sale Date
     Route::get('admin/sale', AdminSaleComponent::class)->name('admin.sale');
+    //Coupon
+    Route::get('/admin/coupon', AdminCouponComponent::class)->name('admin.coupon');
+    Route::get('/admin/coupon/add', AdminAddCouponComponent::class)->name('admin.addcoupon');
+    Route::get('/admin/coupon/edit/{coupon_id}', AdminEditCouponComponent::class)->name('admin.editcoupon');
+    
 });

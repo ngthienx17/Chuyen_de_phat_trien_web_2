@@ -110,6 +110,11 @@
                     title="Sale Setting">
                       <div data-i18n="Sale Setting">Sale Setting</div></a>
             </li>
+            <li class="menu-item  mb-4" data-menu="coupon">
+                <a class=" menu-link" href="{{ route('admin.coupon') }}"
+                    title="Coupon">
+                      <div data-i18n="Coupon">Coupon</div></a>
+            </li>
           </ul>
         </aside>
         <!-- / Menu -->
@@ -280,7 +285,8 @@
                    "products": false,
                    "slider": false,
                    "home-category": false,
-                   "sale": false
+                   "sale": false,
+                   "coupon":false 
                };
 
                // Kiểm tra xem đường dẫn URL có chứa một trong các menu không

@@ -10,6 +10,9 @@ use Livewire\Component;
 class CartComponent extends Component
 {
     protected $listeners = ['refreshComponent' =>'$refresh'];
+
+    public $haveCouponCode;
+    
     public function increaseQuantity($rowId)
     {
         $product = Cart::instance('cart')->get($rowId);

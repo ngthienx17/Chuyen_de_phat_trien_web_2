@@ -9,7 +9,7 @@
             </ul>
         </div>
         <div class=" main-content-area">
-            
+
             <div class="wrap-iten-in-cart">
                 @if(Session::has('success_message'))
                 <div class="alert alert-success">
@@ -83,9 +83,23 @@
                 </div>
                 <div class="checkout-info">
                     <label class="checkbox-field">
-                        <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I
+                        <input class="frm-input " name="have-code" id="have-code" value="1" type="checkbox" wire:model="haveCouponCode"><span>I
                             have promo code</span>
                     </label>
+                    @if ($haveCouponCode ==1)
+                    <div class="summary-item">
+                        <form>
+                            <h4 class="title-box">
+                                Mã giảm giá
+                            </h4>
+                            <div class="row-in-form">
+                                <label for="coupon-code" class="form-label">Nhập mã giảm giá: </label>
+                                <input type="text" class="form-control" name="coupon-code">
+                            </div>
+                            <button type="submit" class="btn btn-small">Áp dụng</button>
+                        </form>
+                    </div>
+                    @endif
                     <a class="btn btn-checkout" href="checkout.html">Check out</a>
                     <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right"
                             aria-hidden="true"></i></a>

@@ -23,7 +23,7 @@
                                 All Categories
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('admin.addcategory') }}" class="btn btn-success pull-right">Add
+                                <a href="{{ route('admin.addcoupon') }}" class="btn btn-success pull-right">Add
                                     New</a>
                             </div>
                         </div>
@@ -38,25 +38,35 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Category Name</th>
-                                    <th>Slug</th>
+                                    <th>Coupon Name</th>
+                                    <th>Coupon Type</th>
+                                    <th>Coupon Value</th>
+                                    <th>Cart Value</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($coupons as $coupon)
                                     <tr>
-                                        <td>{{ $category->id }}</td>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->slug }}</td>
+                                        <td>{{ $coupon->id }}</td>
+                                        <td>{{ $coupon->code }}</td>
+                                        <td>{{ $coupon->type }}</td>
+                                        @if ($coupon->type=='fixed')
+                                            
+                                        <td>${{ $coupon->value }}</td>
+                                        @else
+                                        <td>{{ $coupon->value }}%</td>
+                                            
+                                        @endif
+                                        <td>{{ $coupon->cart_value }}</td>
                                         <td>
                                             <a class="btn btn-sm btn-success"
-                                                href="{{ route('admin.editcategory', ['category_slug' => $category->slug]) }}"><i
+                                                href="{{ route('admin.editcoupon', ['coupon_id' => $coupon->id]) }}"><i
                                                     class='bx bx-edit'></i> Edit</a>
                                             <button
                                                 class="btn btn-sm btn-danger"
                                                 wire:confirm="Bạn có chắc chắn muốn xóa?"
-                                                wire:click.prevent="selectItem({{ $category->id }})">
+                                                wire:click.prevent="deleteCoupon({{ $coupon->id }})">
                                                 <i class='bx bx-trash'></i>
                                                 Delete
                                             </button>
@@ -66,7 +76,7 @@
 
                             </tbody>
                         </table>
-                        {{ $categories->links() }}
+                        {{-- {{ $coupon->links() }} --}}
                     </div>
 
                 </div>
